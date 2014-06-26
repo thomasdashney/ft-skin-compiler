@@ -20,7 +20,6 @@ public class Main {
 			System.exit(1);
 		}
 		if( cmd.hasOption("t") ) {
-		    // initialise the member variable
 		    System.out.println("flag!");
 		}
 		else {
