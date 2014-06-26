@@ -18,6 +18,7 @@ public class HtmlTemplate {
 		String ext = FilenameUtils.getExtension(file.getName());
 		if (!ext.equals("html"))
 			throw new Exception("File '" + file.getName() + "' is not an html file");
+		
 		originalFile = file;
 		
 		// read the file into a doc
