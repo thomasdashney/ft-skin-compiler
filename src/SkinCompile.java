@@ -31,10 +31,7 @@ public class SkinCompile {
 			System.exit(1);
 		}
 		
-		// loop html/index.html
-		//		html/inside-page.html
-		//		html/widget-page.html
-		
+		// process the html templates		
 		File[] files = {new File(dir, "html/index.html"),
 						new File(dir, "html/inside-page.html"),
 						new File(dir, "html/widget-page.html")};
@@ -45,7 +42,7 @@ public class SkinCompile {
 			try {
 				template = new HtmlTemplate(file);
 			} catch (IOException e) { // io error.. ignore?
-				System.out.println(e.getMessage());
+				System.out.println("Note: no " + file.getName() + " found");
 			} catch (Exception e) { // actual bad message -- tell the user as an error
 				System.err.println(e.getMessage());
 			}
@@ -55,12 +52,8 @@ public class SkinCompile {
 				templates.add(template);
 			}
 		}
-		
-		// generate a zip of the templates that we have
-		// /css from original
-		// /html
-		// skin.json
-		// /themes
+
+		// create .zip file
 		
 		OutputStream zipOutput = null;
 		try {
@@ -81,6 +74,7 @@ public class SkinCompile {
 			addDirectoryToArchive("themes", new File(dir, "themes"), logicalZip);
 			addFileToArchive("skin.json", new File(dir, "skin.json"), logicalZip);
 			
+			// write zip
 			logicalZip.finish();
 			zipOutput.close();
 		} 
@@ -88,8 +82,13 @@ public class SkinCompile {
 			System.err.println("Error writing zip file: " + e.getMessage());
 			System.exit(1);		
 		}
+		
+		System.out.println("-------------\n"
+				+ "zip file successfully created at: " + destination.getPath());
 	}
 	
+	// zip helper methods: 
+
 	public static void addStringToArchive(String newPath, String string, ArchiveOutputStream stream) throws IOException {
 		ZipArchiveEntry entry = new ZipArchiveEntry(newPath);
 		stream.putArchiveEntry(entry);
