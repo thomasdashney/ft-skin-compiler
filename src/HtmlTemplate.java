@@ -33,10 +33,12 @@ public class HtmlTemplate {
 		}
 	}
 	
-	public void removeThemeCss() {
-		Element themeLink = this.doc.getElementById("themeCssLink");
-		if (themeLink != null)
-			themeLink.remove();
+	public void removeExtraCss() {
+		Elements css = this.doc.getElementsByClass("extra-theme");
+		if (css != null) {
+			for (Element e: css)
+				e.remove();
+		}
 	}
 	
 	public File getOriginalFile() {

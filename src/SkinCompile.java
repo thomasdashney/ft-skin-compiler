@@ -38,7 +38,7 @@ public class SkinCompile {
 			}
 			if (template != null) { // template is good
 				template.removePlaceholderContents();
-				template.removeThemeCss();
+				template.removeExtraCss();
 				templates.add(template);
 			}
 		}
